@@ -6,7 +6,8 @@
     region: us-east-2
 
 
-- rds:
+- name: set up rds
+  rds:
     command: create
     instance_name: "{{instance_name}}"
     db_engine: MySQL
