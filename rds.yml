@@ -12,7 +12,7 @@
     - name: set up rds
       rds:
         command: create
-        instance_name: "{{instance_name}}"
+        instance_name: mydb
         db_engine: MySQL
         size: 10
         instance_type: db.t2.micro
