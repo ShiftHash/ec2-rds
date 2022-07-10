@@ -9,6 +9,10 @@
       - bastion2
     region: us-east-2
 
+    instance_name: my DB
+    username: admin
+    password: admin123
+
   tasks:
 
     - name: Create vprofile ec2 key
@@ -35,6 +39,18 @@
             cidr_ip: 94.218.225.74/32
       register: BastionSG_out
 
+    - name: Create Security Group for DB
+      ec2_group:
+        name: db-host-sg
+        description: Allow port 3306 from everywhere and all ports within sg
+        region: us-east-2
+        rules:
+          - proto: tcp
+            from_port: 3306
+            to_port: 3306
+            cidr_ip: 94.218.225.74/32
+      register: dbSG_out
+
     - name: Creating Bastion Host
       ec2:
         key_name: bastion-key
@@ -50,3 +66,18 @@
        # loop: "{{instance_ids}}"
       register: bastionHost_out
       loop: "{{ instance_tag }}"
+
+    - name: set up rds
+      rds:
+        command: create
+        instance_name: mydb
+        db_engine: MySQL
+        size: 10
+        instance_type: db.t2.micro
+        username: "{{username}}"
+        password: "{{password}}"
+        region: "{{region}}"
+        tags:
+          Environment: testing
+          Application: cms
+      register: rds_out

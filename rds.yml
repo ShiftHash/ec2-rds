@@ -1,4 +1,4 @@
-- name: Setup Bastion Host
+- name: Setup RDS
   hosts: localhost
   connection: local
   gather_facts: no
@@ -6,6 +6,8 @@
   vars:
     instance_name: my DB
     region: us-east-2
+    username: admin
+    password: admin123
 
   tasks:
 
@@ -16,8 +18,8 @@
         db_engine: MySQL
         size: 10
         instance_type: db.t2.micro
-        username: admin123
-        password: 1nsecure
+        username: "{{username}}"
+        password: "{{password}}"
         region: "{{region}}"
         tags:
           Environment: testing
