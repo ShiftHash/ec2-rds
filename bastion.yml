@@ -1,0 +1,47 @@
+---
+- name: Setup Bastion Host
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Import VPC setup variables
+      include_vars: ec2_vars
+
+    - name: Create vprofile ec2 key
+      ec2_key:
+        name: bastion-key
+        region: us-east-2
+      register: key_out
+
+    - name: Save private key into file bastion-key.pem
+      copy:
+        content: "{{key_out.key.private_key}}"
+        dest: "./bastion-key.pem"
+      when: key_out.changed
+
+    - name: Create Security Group for Bastion Host
+      ec2_group:
+        name: Bastion-host-sg
+        description: Allow port 22 from everywhere and all ports within sg
+        region: us-east-2
+        rules:
+          - proto: tcp
+            from_port: 22
+            to_port: 22
+            cidr_ip: 94.218.225.74/32
+      register: BastionSG_out
+
+    - name: Creating Bastion Host
+      ec2:
+        key_name: bastion-key
+        region: us-east-2
+        instance_type: t2.micro
+        image: ami-03657b56516ab7912
+        wait: yes
+        wait_timeout: 300
+        instance_tags:
+          Name: "{{name}}"
+        loop:
+            - bastion 1
+            - bastion 2
+      register: bastionHost_out
