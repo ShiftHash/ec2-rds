@@ -4,8 +4,6 @@
   connection: local
   gather_facts: no
   tasks:
-    - name: Import VPC setup variables
-      include_vars: ec2_vars
 
     - name: Create vprofile ec2 key
       ec2_key:
