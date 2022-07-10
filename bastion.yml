@@ -39,18 +39,6 @@
             cidr_ip: 94.218.225.74/32
       register: BastionSG_out
 
-    - name: Create Security Group for DB
-      ec2_group:
-        name: db-host-sg
-        description: Allow port 3306 from everywhere and all ports within sg
-        region: "{{region}}"
-        rules:
-          - proto: tcp
-            from_port: 3306
-            to_port: 3306
-            group_id: Bastion-host-sg
-      register: dbSG_out
-
     - name: Creating Bastion Host
       ec2:
         key_name: bastion-key
