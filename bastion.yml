@@ -4,7 +4,7 @@
   connection: local
   gather_facts: no
   vars:
-    instance_ids:
+    instance_tag:
       - bastion1
       - bastion2
     region: us-east-2
@@ -46,7 +46,8 @@
         wait_timeout: 300
         state: present
         instance_tags:
-          Name: bastion
-        instance_ids: '{{ instance_ids }}'
+          Name: ""{name}""
+
        # loop: "{{instance_ids}}"
       register: bastionHost_out
+      loop: "{{instance_tag}}"
