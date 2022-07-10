@@ -49,7 +49,7 @@
         username: "{{username}}"
         password: "{{password}}"
         region: "{{region}}"
-        groupName: Bastion-host-sg
+        groupId: Bastion-host-sg
         tags:
           Environment: testing
           Application: cms

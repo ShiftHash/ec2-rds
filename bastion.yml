@@ -67,6 +67,9 @@
       register: bastionHost_out
       loop: "{{ instance_tag }}"
 
+    - debug:
+        var: bastionHost_out
+
     - name: set up rds
       rds:
         command: create
