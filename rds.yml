@@ -5,7 +5,6 @@
 
   vars:
     instance_name: my DB
-    region: us-east-2
 
   tasks:
 
