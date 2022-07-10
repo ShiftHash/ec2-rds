@@ -22,3 +22,4 @@
         tags:
           Environment: testing
           Application: cms
+      register: rds_out
