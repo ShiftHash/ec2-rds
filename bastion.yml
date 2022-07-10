@@ -46,7 +46,7 @@
         wait_timeout: 300
         state: present
         instance_tags:
-          Name: "{{ name }}"
+          Name: "{{ item }}"
        # loop: "{{instance_ids}}"
       register: bastionHost_out
       loop: "{{ instance_tag }}"
