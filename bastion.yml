@@ -36,7 +36,9 @@
         instance_type: t2.micro
         image: ami-03657b56516ab7912
         wait: yes
+        group: Bastion-host-sg
         wait_timeout: 300
+        state: present
         instance_tags:
           Name: "{{name}}"
         loop:
