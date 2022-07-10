@@ -1,0 +1,19 @@
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    instance_name: my DB
+    region: us-east-2
+
+
+- rds:
+    command: create
+    instance_name: "{{instance_name}}"
+    db_engine: MySQL
+    size: 10
+    instance_type: db.m1.small
+    username: mysql_admin
+    password: 1nsecure
+    tags:
+      Environment: testing
+      Application: cms
