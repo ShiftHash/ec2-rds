@@ -47,5 +47,6 @@
         state: present
         instance_tags:
           Name: bastion
-        loop: "{{instance_ids}}"
+        instance_ids: '{{ instance_ids }}'
+       # loop: "{{instance_ids}}"
       register: bastionHost_out
