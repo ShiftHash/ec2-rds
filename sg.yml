@@ -49,7 +49,7 @@
         username: "{{username}}"
         password: "{{password}}"
         region: "{{region}}"
-        groupId: Bastion-host-sg
+        vpc_security_groups: Bastion-host-sg
         tags:
           Environment: testing
           Application: cms
