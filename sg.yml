@@ -49,7 +49,7 @@
         username: "{{username}}"
         password: "{{password}}"
         region: "{{region}}"
-        security_groups: Bastion-host-sg
+        security_groups: default
         tags:
           Environment: testing
           Application: cms
