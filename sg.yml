@@ -49,8 +49,7 @@
         username: "{{username}}"
         password: "{{password}}"
         region: "{{region}}"
-        groupID:
-          security_groups: Bastion-host-sg
+        security_groups: Bastion-host-sg
         tags:
           Environment: testing
           Application: cms
